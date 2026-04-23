@@ -1,0 +1,15 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Self-Ligating Braces Diagram -->
+  <!-- Single Bracket Mechanism Detail -->
+  <rect x="60" y="60" width="80" height="80" rx="10" fill="#94A3B8" stroke="#475569" stroke-width="2"/>
+  <rect x="70" y="90" width="60" height="20" rx="2" fill="#F1F5F9" /> <!-- Slot -->
+  <!-- Sliding Clip -->
+  <rect x="75" y="85" width="50" height="30" rx="4" fill="#334155" fill-opacity="0.8">
+    <animate attributeName="y" values="85;70;85" dur="3s" repeatCount="indefinite" />
+  </rect>
+  
+  <circle cx="100" cy="100" r="3" fill="#1a897f" />
+  
+  <text x="100" y="160" text-anchor="middle" fill="#1a897f" font-family="Arial" font-size="12" font-weight="bold">SELF-LIGATING MECHANISM</text>
+  <text x="100" y="175" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="10">Low Friction, Faster Results</text>
+</svg>

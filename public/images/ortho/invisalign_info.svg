@@ -1,0 +1,15 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Patient-facing Invisalign Diagram -->
+  <path d="M40 80C40 80 60 70 100 70C140 70 160 80 160 80L165 110C165 110 145 100 100 100C55 100 35 110 35 110L40 80Z" fill="#E0F2F1" fill-opacity="0.6" stroke="#1a897f" stroke-width="2"/>
+  <path d="M42 85C42 85 62 75 100 75C138 75 158 85 158 85" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="1.5" stroke-dasharray="4 2"/>
+  <path d="M50 82V105" stroke="#1a897f" stroke-width="1" stroke-opacity="0.3"/>
+  <path d="M70 75V98" stroke="#1a897f" stroke-width="1" stroke-opacity="0.3"/>
+  <path d="M90 72V95" stroke="#1a897f" stroke-width="1" stroke-opacity="0.3"/>
+  <path d="M110 72V95" stroke="#1a897f" stroke-width="1" stroke-opacity="0.3"/>
+  <path d="M130 75V98" stroke="#1a897f" stroke-width="1" stroke-opacity="0.3"/>
+  <path d="M150 82V105" stroke="#1a897f" stroke-width="1" stroke-opacity="0.3"/>
+  <!-- Highlight for transparency -->
+  <ellipse cx="100" cy="80" rx="40" ry="10" fill="white" fill-opacity="0.2"/>
+  <text x="100" y="140" text-anchor="middle" fill="#1a897f" font-family="Arial" font-size="12" font-weight="bold">CLEAR ALIGNER TECHNOLOGY</text>
+  <text x="100" y="155" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="10">Removable & Discreet</text>
+</svg>

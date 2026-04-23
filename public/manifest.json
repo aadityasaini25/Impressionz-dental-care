@@ -1,0 +1,17 @@
+{
+  "name": "Face Max Dental Clinic",
+  "short_name": "Face Max Dental",
+  "description": "Expert Oral & Maxillofacial Surgery and Implantology in Pune. Dr. Shubham Sunil Salunkhe. Bhekrai Nagar Road.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#485b51",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "64x64 32x32 24x24 16x16", "type": "image/x-icon" },
+    { "src": "/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" }
+  ],
+  "categories": ["health", "medical", "dental"],
+  "lang": "en",
+  "dir": "ltr"
+}

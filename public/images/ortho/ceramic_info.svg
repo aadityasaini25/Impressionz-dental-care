@@ -1,0 +1,20 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ceramic Braces Diagram -->
+  <!-- Teeth base -->
+  <rect x="40" y="80" width="30" height="40" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <rect x="75" y="75" width="30" height="45" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <rect x="110" y="75" width="30" height="45" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <rect x="145" y="80" width="30" height="40" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+  
+  <!-- Clear Archwire/Ties -->
+  <path d="M30 100C30 100 100 95 185 100" stroke="#E2E8F0" stroke-width="2"/>
+  
+  <!-- Aesthetic Brackets -->
+  <rect x="48" y="93" width="14" height="14" rx="2" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <rect x="83" y="88" width="14" height="14" rx="2" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <rect x="118" y="88" width="14" height="14" rx="2" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <rect x="153" y="93" width="14" height="14" rx="2" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  
+  <text x="100" y="160" text-anchor="middle" fill="#1a897f" font-family="Arial" font-size="12" font-weight="bold">CERAMIC AESTHETIC SYSTEM</text>
+  <text x="100" y="175" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="10">Tooth-Colored & Discreet</text>
+</svg>
