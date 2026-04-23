@@ -2,32 +2,72 @@
 
 import React from 'react';
 
+/**
+ * Layered decorative background with brand gradient mesh, floating blobs
+ * in teal + pink (matching the Impressionz logo), soft noise, and a grid
+ * pattern at very low opacity for depth.
+ */
 export default function BackgroundGraphics() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
-      {/* Dynamic Blobs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#72b1b1] rounded-full blur-[80px] opacity-[0.08] animate-pulse" />
-      <div className="absolute bottom-[-5%] right-[-5%] w-[400px] h-[400px] bg-[#485b51] rounded-full blur-[70px] opacity-[0.05] soft-float" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-pattern-dots opacity-[0.02]" />
+      {/* Large teal aurora – top left */}
+      <div
+        className="absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full blur-[110px] opacity-[0.22] animate-pulse"
+        style={{ background: 'radial-gradient(circle, var(--brand-teal) 0%, transparent 70%)', animationDuration: '8s' }}
+      />
 
-      {/* Decorative SVG Icons - Floating */}
-      <div className="absolute top-1/4 right-[10%] opacity-20 soft-float" style={{ animationDelay: '1s' }}>
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-[#72b1b1]">
-          <path d="M7 12c0 3.866 3.134 7 7 7s7-3.134 7-7-3.134-7-7-7-7 3.134-7 7z" />
-          <path d="M12 9l2 2-2 2" />
+      {/* Pink aurora – top right (logo accent) */}
+      <div
+        className="absolute -top-24 -right-24 w-[440px] h-[440px] rounded-full blur-[110px] opacity-[0.14] soft-float"
+        style={{ background: 'radial-gradient(circle, var(--accent-pink) 0%, transparent 70%)', animationDelay: '1.5s' }}
+      />
+
+      {/* Deep teal – bottom right */}
+      <div
+        className="absolute -bottom-40 -right-16 w-[460px] h-[460px] rounded-full blur-[100px] opacity-[0.10] soft-float"
+        style={{ background: 'radial-gradient(circle, var(--brand-teal-deep) 0%, transparent 70%)', animationDelay: '3s' }}
+      />
+
+      {/* Soft pink – bottom left (subtle) */}
+      <div
+        className="absolute -bottom-24 -left-16 w-[380px] h-[380px] rounded-full blur-[100px] opacity-[0.08] soft-float"
+        style={{ background: 'radial-gradient(circle, var(--accent-pink) 0%, transparent 70%)', animationDelay: '4.5s' }}
+      />
+
+      {/* Mid-page teal glow for vertical continuity */}
+      <div
+        className="absolute top-1/2 left-1/3 w-[560px] h-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[130px] opacity-[0.06] soft-float"
+        style={{ background: 'radial-gradient(circle, var(--brand-teal) 0%, transparent 70%)', animationDelay: '6s' }}
+      />
+
+      {/* Dot pattern (very subtle depth) */}
+      <div className="absolute inset-0 bg-pattern-dots opacity-[0.03]" />
+
+      {/* Floating 3D ornaments */}
+      <div className="absolute top-[22%] right-[8%] opacity-25 float-3d" style={{ animationDelay: '0.5s' }}>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-[var(--brand-teal)]" aria-hidden>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v10M7 12h10" strokeLinecap="round" />
         </svg>
       </div>
 
-      <div className="absolute bottom-1/3 left-[5%] opacity-15 soft-float" style={{ animationDelay: '3s' }}>
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-[#485b51]">
-          <rect x="3" y="3" width="18" height="18" rx="2" />
-          <path d="M9 3v18M15 3v18M3 9h18M3 15h18" />
+      <div className="absolute bottom-[28%] left-[6%] opacity-20 float-3d" style={{ animationDelay: '2.5s' }}>
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-[var(--accent-pink)]" aria-hidden>
+          <path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z" strokeLinejoin="round" />
         </svg>
       </div>
 
-      {/* Subtle Noise Texture */}
-      <div className="absolute inset-0 opacity-[0.015] contrast-150 brightness-100 pointer-events-none" 
-           style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }} />
+      <div className="absolute top-[55%] right-[14%] opacity-15 float-3d" style={{ animationDelay: '4s' }}>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-[var(--brand-teal-deep)]" aria-hidden>
+          <circle cx="12" cy="12" r="9" />
+        </svg>
+      </div>
+
+      {/* Subtle noise for film-grain depth */}
+      <div
+        className="absolute inset-0 opacity-[0.015] contrast-150 pointer-events-none mix-blend-overlay"
+        style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
+      />
     </div>
   );
 }

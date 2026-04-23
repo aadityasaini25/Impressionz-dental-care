@@ -68,7 +68,7 @@ export const branches: Record<string, BranchConfig> = {
       "All services under one roof"
     ],
     pricing: {
-      implant: "₹27,000 (without caps)"
+      implant: "₹27,000 onwards*"
     },
     heroTitle: "Premium Painless Dentistry in Borivali West",
     heroVideo: "/videos/brevli/StorySaver.net-impressionzdentalcare-Video-1776941816077.mp4",
@@ -137,7 +137,7 @@ export const branches: Record<string, BranchConfig> = {
       "All treatments under one roof"
     ],
     pricing: {
-      implant: "₹27,000"
+      implant: "₹27,000 onwards*"
     },
     heroTitle: "Advanced Painless Dentistry in Andheri West",
     heroVideo: "/videos/andheri/StorySaver.net-impressionzdentalcare-Video-1776941719341.mp4",

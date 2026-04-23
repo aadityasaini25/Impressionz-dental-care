@@ -45,20 +45,26 @@ export default function FAQSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-8 bg-white" id="faq">
-      <div className="max-w-4xl mx-auto">
+    <section className="relative py-16 md:py-24 px-4 md:px-8 overflow-hidden" id="faq">
+      {/* decorative blob */}
+      <div aria-hidden className="pointer-events-none absolute -top-10 right-0 w-80 h-80 rounded-full blur-3xl opacity-20"
+           style={{ background: 'radial-gradient(circle, var(--accent-pink) 0%, transparent 70%)' }} />
+      <div aria-hidden className="pointer-events-none absolute bottom-0 -left-10 w-96 h-96 rounded-full blur-3xl opacity-20"
+           style={{ background: 'radial-gradient(circle, var(--brand-teal) 0%, transparent 70%)' }} />
+
+      <div className="relative max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium mb-4"
+            className="inline-flex items-center gap-2 badge-pink px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-4"
           >
-            <Sparkles size={14} />
+            <Sparkles size={12} />
             <span>Got Questions? We Have Answers</span>
           </motion.div>
           <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight text-gray-900 leading-tight">
-            Common <span className="text-[#485b51]">Questions</span>
+            Common <span className="text-gradient-logo">Questions</span>
           </h2>
           <p className="text-gray-500 max-w-xl mx-auto text-base md:text-lg font-light">
             Empowering your decision with transparent information and clinical insights.
@@ -67,12 +73,12 @@ export default function FAQSection() {
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div 
-              key={index} 
-              className={`group transition-all duration-300 rounded-2xl border bg-white ${
-                openIndex === index 
-                ? 'border-[#485b51]/20 shadow-md' 
-                : 'border-gray-100 hover:border-gray-200'
+            <div
+              key={index}
+              className={`group transition-all duration-300 rounded-2xl border bg-white/90 backdrop-blur-sm ${
+                openIndex === index
+                ? 'border-[var(--accent-pink)]/20 depth-stack'
+                : 'border-gray-100 hover:border-[var(--brand-teal)]/30 shadow-sm'
               }`}
             >
               <button
@@ -81,14 +87,14 @@ export default function FAQSection() {
                 className="w-full p-5 md:p-6 text-left flex justify-between items-center focus:outline-none"
               >
                 <span className={`text-lg md:text-xl font-bold tracking-tight transition-colors duration-300 ${
-                  openIndex === index ? 'text-[#485b51]' : 'text-gray-800'
+                  openIndex === index ? 'text-[var(--brand-teal-deep)]' : 'text-gray-800'
                 }`}>
                   {faq.question}
                 </span>
                 <div className={`flex-shrink-0 ml-4 w-9 h-9 rounded-xl border flex items-center justify-center transition-all duration-300 ${
-                  openIndex === index 
-                  ? 'bg-[#485b51] border-[#485b51] text-white rotate-90 shadow-sm shadow-[#485b51]/20' 
-                  : 'bg-gray-50 border-gray-100 text-gray-400 group-hover:border-[#485b51]/30 group-hover:text-[#485b51]'
+                  openIndex === index
+                  ? 'bg-gradient-to-br from-[var(--accent-pink)] to-[var(--brand-teal)] border-transparent text-white rotate-90 shadow-md'
+                  : 'bg-gray-50 border-gray-100 text-gray-400 group-hover:border-[var(--brand-teal)]/30 group-hover:text-[var(--brand-teal-deep)]'
                 }`}>
                   {openIndex === index ? <Minus size={16} /> : <Plus size={16} />}
                 </div>
@@ -103,13 +109,13 @@ export default function FAQSection() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                   >
                     <div className="px-5 pb-6 md:px-6 md:pb-8 pt-0">
-                      <div className="w-full h-px bg-gray-50 mb-6" />
-                      
+                      <div className="w-full h-px bg-gradient-to-r from-transparent via-[var(--brand-teal)]/30 to-transparent mb-6" />
+
                       <div className="space-y-4">
                         <p className="text-gray-600 text-base md:text-lg leading-relaxed">
                           {faq.answer}
                         </p>
-                        <p className="text-[#485b51] text-base font-medium leading-relaxed italic border-l-2 border-emerald-100 pl-4">
+                        <p className="text-[var(--brand-teal-deep)] text-base font-medium leading-relaxed italic border-l-2 border-[var(--accent-pink)] pl-4">
                           &quot;{faq.benefit}&quot;
                         </p>
                       </div>
@@ -120,10 +126,10 @@ export default function FAQSection() {
             </div>
           ))}
         </div>
-        
+
         <div className="mt-12 text-center">
           <p className="text-gray-400 text-xs">
-            Still have questions? <a href="tel:+919023523178" className="text-[#485b51] font-bold underline hover:text-[#3d4d44] transition-colors">Contact our specialists</a>.
+            Still have questions? <a href="tel:+919821528338" className="text-[var(--accent-pink)] font-bold underline hover:text-[var(--accent-pink-dark)] transition-colors">Contact our specialists</a>.
           </p>
         </div>
       </div>

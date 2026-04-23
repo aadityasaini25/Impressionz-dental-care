@@ -14,32 +14,38 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Tooth Story – Dental Clinic For All",
-  description: "Dr. Nikunj Maniyar (Orthodontist & Pedodontist | Invisalign Specialist). Located at Sunrise Park, Ahmedabad. Gold medalist specialist for adult and kids orthodontic care.",
-  keywords: "Dr. Nikunj Maniyar, Orthodontist, Pedodontist, Tooth Story, Invisalign Ahmedabad, Kids Braces, Junior Aligners",
-  authors: [{ name: "Dr. Nikunj Maniyar" }],
-  creator: "Tooth Story – Dental Clinic For All",
-  publisher: "Tooth Story – Dental Clinic For All",
+  title: {
+    default: "Impressionz Dental Care – Painless, Premium Dentistry in Mumbai",
+    template: "%s | Impressionz Dental Care",
+  },
+  description:
+    "Impressionz Dental Care: affordable, tech-driven and painless dentistry in Mumbai. Two branches — Borivali West & Andheri West. Implants, braces, Invisalign, cosmetic dentistry and more, under one roof.",
+  keywords:
+    "Impressionz Dental Care, dentist Mumbai, dentist Borivali, dentist Andheri, dental implants Mumbai, Invisalign Mumbai, painless dentistry, cosmetic dentistry, Dr. Sandeep Singh, Dr. Priya Singh",
+  authors: [{ name: "Impressionz Dental Care" }],
+  creator: "Impressionz Dental Care",
+  publisher: "Impressionz Dental Care",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://tooth-story.vercel.app'),
+  metadataBase: new URL('https://impressionzdentalcare.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: "Tooth Story | Expert Invisalign & Kids Orthodontic Care",
-    description: "Dr. Nikunj Maniyar - 6+ Years Experience. Sunrise Park, Ahmedabad.",
-    url: 'https://tooth-story.vercel.app/',
-    siteName: "Tooth Story – Dental Clinic For All",
+    title: "Impressionz Dental Care – Painless Dentistry in Mumbai",
+    description:
+      "Premium, painless dental care in Borivali West and Andheri West. Implants, Invisalign, braces, cosmetic dentistry and more — all under one roof.",
+    url: 'https://impressionzdentalcare.com/',
+    siteName: "Impressionz Dental Care",
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/images/logo.webp',
         width: 1200,
         height: 630,
-        alt: "Tooth Story – Dental Clinic For All",
+        alt: "Impressionz Dental Care",
       },
     ],
     locale: 'en_IN',
@@ -47,9 +53,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Tooth Story – Dental Clinic For All",
-    description: "Expert Invisalign & Kids Orthodontic Care in Ahmedabad",
-    images: ['/og-image.jpg'],
+    title: "Impressionz Dental Care – Painless Dentistry in Mumbai",
+    description:
+      "Borivali West & Andheri West. Implants, Invisalign, braces, cosmetic dentistry and more.",
+    images: ['/images/logo.webp'],
   },
   robots: {
     index: true,

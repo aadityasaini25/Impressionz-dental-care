@@ -4,14 +4,47 @@
 
 @layer base {
   :root {
+    /* === Brand palette (from logo) === */
     --brand-teal: #72b1b1;
     --brand-teal-dark: #5a8d8d;
+    --brand-teal-deep: #3e7a7a;
+    --brand-teal-ink: #1f4545;
     --brand-dark: #2d3e40;
-    --bg-medical-light: #f1f7f7;
-    --glass-border: rgba(114, 177, 177, 0.2);
-    --glass-bg: rgba(255, 255, 255, 0.9);
+    --brand-darker: #1a2526;
+
+    /* === Pink accent (matches logo magenta band) === */
+    --accent-pink: #ec2f8a;
+    --accent-pink-dark: #c41e6e;
+    --accent-pink-soft: #fde4ef;
+    --accent-pink-glow: rgba(236, 47, 138, 0.18);
+
+    /* === Functional === */
+    --accent-whatsapp: #25D366;
+
+    /* === Surfaces (light & airy for clinic feel) === */
+    --bg-page: #fafbfb;
+    --bg-medical-light: #f4fafa;
+    --bg-lavender: #f6f3f5;
+    --bg-surface: #ffffff;
+    --bg-surface-soft: #f8fafa;
+
+    /* === Glass / overlay === */
+    --glass-border: rgba(114, 177, 177, 0.18);
+    --glass-bg: rgba(255, 255, 255, 0.72);
+    --glass-bg-strong: rgba(255, 255, 255, 0.92);
+
+    /* === Shadows — layered for depth === */
     --shadow-premium: 0 20px 50px -12px rgba(114, 177, 177, 0.12);
     --shadow-premium-hover: 0 30px 60px -12px rgba(114, 177, 177, 0.2);
+    --shadow-layered:
+      0 1px 2px rgba(31, 69, 69, 0.04),
+      0 4px 12px -2px rgba(31, 69, 69, 0.06),
+      0 16px 40px -12px rgba(114, 177, 177, 0.18);
+    --shadow-layered-hover:
+      0 2px 4px rgba(31, 69, 69, 0.06),
+      0 8px 16px -4px rgba(31, 69, 69, 0.10),
+      0 28px 60px -16px rgba(114, 177, 177, 0.30);
+    --shadow-pink-glow: 0 20px 50px -20px var(--accent-pink-glow);
   }
 
   html {
@@ -25,7 +58,12 @@
     line-height: 1.6;
     color: #1e293b;
     /* Softer black */
-    background-color: var(--bg-medical-light);
+    background-color: var(--bg-page);
+    background-image:
+      radial-gradient(at 12% 8%, rgba(114, 177, 177, 0.12) 0px, transparent 55%),
+      radial-gradient(at 88% 6%, rgba(236, 47, 138, 0.06) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(114, 177, 177, 0.08) 0px, transparent 60%);
+    background-attachment: fixed;
   }
 }
 
@@ -57,6 +95,10 @@
 
   .bg-lavender {
     background-color: var(--bg-lavender);
+  }
+
+  .bg-brand-surface {
+    background-color: var(--bg-medical-light);
   }
 
   .hover-lift {
@@ -161,6 +203,177 @@
   .stagger-2 { transition-delay: 0.2s; }
   .stagger-3 { transition-delay: 0.3s; }
   .stagger-4 { transition-delay: 0.4s; }
+  .stagger-5 { transition-delay: 0.5s; }
+  .stagger-6 { transition-delay: 0.6s; }
+
+  /* === Modern 3D / layered polish === */
+  .card-3d-tilt {
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease;
+    box-shadow: var(--shadow-layered);
+  }
+
+  .card-3d-tilt:hover {
+    transform: perspective(1200px) rotateX(2deg) rotateY(-2deg) translateY(-6px);
+    box-shadow: var(--shadow-layered-hover);
+  }
+
+  .layer-shadow {
+    box-shadow: var(--shadow-layered);
+  }
+
+  .layer-shadow-hover:hover {
+    box-shadow: var(--shadow-layered-hover);
+  }
+
+  /* Soft gradient ring for hero / featured elements */
+  .ring-gradient {
+    position: relative;
+  }
+  .ring-gradient::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(114, 177, 177, 0.6), rgba(255, 255, 255, 0.1), rgba(72, 91, 81, 0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Gradient ring using pink+teal (logo gradient) */
+  .ring-gradient-logo {
+    position: relative;
+  }
+  .ring-gradient-logo::before {
+    content: "";
+    position: absolute;
+    inset: -1.5px;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(135deg, var(--accent-pink) 0%, rgba(255,255,255,0.4) 50%, var(--brand-teal) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* === 3D depth utilities === */
+
+  /* Continuous gentle 3D float (for hero ornaments) */
+  .float-3d {
+    animation: float-3d 6s ease-in-out infinite;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  @keyframes float-3d {
+    0%, 100% {
+      transform: translateY(0) rotateX(0) rotateY(0);
+    }
+    50% {
+      transform: translateY(-12px) rotateX(3deg) rotateY(-3deg);
+    }
+  }
+
+  /* Pressed-depth button (3D) */
+  .btn-3d {
+    position: relative;
+    box-shadow:
+      0 4px 0 0 rgba(0, 0, 0, 0.08),
+      0 10px 25px -8px rgba(114, 177, 177, 0.45);
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .btn-3d:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 0 0 rgba(0, 0, 0, 0.08),
+      0 16px 30px -8px rgba(114, 177, 177, 0.55);
+  }
+  .btn-3d:active {
+    transform: translateY(2px);
+    box-shadow:
+      0 1px 0 0 rgba(0, 0, 0, 0.08),
+      0 4px 10px -4px rgba(114, 177, 177, 0.4);
+  }
+
+  .btn-3d-pink {
+    box-shadow:
+      0 4px 0 0 rgba(0, 0, 0, 0.08),
+      0 10px 25px -8px rgba(236, 47, 138, 0.45);
+  }
+  .btn-3d-pink:hover {
+    box-shadow:
+      0 6px 0 0 rgba(0, 0, 0, 0.08),
+      0 16px 30px -8px rgba(236, 47, 138, 0.55);
+  }
+
+  /* Layered depth stack — multiple subtle shadows for card floating feel */
+  .depth-stack {
+    box-shadow:
+      0 1px 2px rgba(31, 69, 69, 0.04),
+      0 4px 8px rgba(31, 69, 69, 0.04),
+      0 16px 32px -8px rgba(114, 177, 177, 0.14),
+      0 30px 60px -20px rgba(236, 47, 138, 0.08);
+    transition: box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .depth-stack:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 2px 4px rgba(31, 69, 69, 0.06),
+      0 8px 16px rgba(31, 69, 69, 0.06),
+      0 24px 48px -10px rgba(114, 177, 177, 0.22),
+      0 40px 80px -24px rgba(236, 47, 138, 0.14);
+  }
+
+  /* Pink accent pill/badge */
+  .badge-pink {
+    background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-pink-dark) 100%);
+    color: #fff;
+    box-shadow: 0 8px 20px -6px var(--accent-pink-glow);
+  }
+
+  /* Soft pink tint card */
+  .tint-pink {
+    background: linear-gradient(135deg, rgba(236, 47, 138, 0.04) 0%, rgba(255, 255, 255, 0.8) 60%);
+    border: 1px solid rgba(236, 47, 138, 0.12);
+  }
+
+  /* Animated gradient sheen across element (for CTAs) */
+  .gradient-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+  .gradient-sheen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.25) 45%,
+      rgba(255, 255, 255, 0.25) 55%,
+      transparent 70%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+  }
+  .gradient-sheen:hover::before {
+    transform: translateX(120%);
+  }
+
+  /* Text gradient: pink → teal (logo colors) */
+  .text-gradient-logo {
+    background: linear-gradient(135deg, var(--accent-pink) 0%, var(--brand-teal-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
   /* Glass Effects */
   .glass-header {
@@ -280,7 +493,8 @@
   }
 
   .review-stars {
-    @apply flex text-yellow-400 mb-3;
+    @apply flex mb-3;
+    color: #f5b400;
   }
 
   /* Doctor profile styles */
@@ -424,7 +638,8 @@
   }
 
   .animated-bg .circle:nth-child(2) {
-    @apply bottom-40 right-10 w-24 h-24 bg-yellow-200 animate-bounce;
+    @apply bottom-40 right-10 w-24 h-24 animate-bounce;
+    background-color: rgba(236, 47, 138, 0.18);
   }
 
   .animated-bg .circle:nth-child(3) {

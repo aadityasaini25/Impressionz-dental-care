@@ -15,9 +15,14 @@ export default function DoctorProfile({ onBookAppointment, branch }: DoctorProfi
     <section className="relative bg-white py-20 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="text-center mb-12 max-w-3xl mx-auto">
-          <p className="text-[#72b1b1] font-semibold text-sm uppercase tracking-[0.2em] mb-2">Our Specialist</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-4">Meet Our Experienced Dentist</h2>
-          <div className="w-16 h-0.5 bg-[#72b1b1] rounded-full mx-auto" />
+          <span className="inline-flex items-center gap-2 badge-pink px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-white/90" />
+            Our Specialist
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-4">
+            Meet Our <span className="text-gradient-logo">Experienced Dentist</span>
+          </h2>
+          <div className="w-16 h-0.5 bg-gradient-to-r from-[var(--accent-pink)] to-[var(--brand-teal)] rounded-full mx-auto" />
           <p className="mt-4 text-gray-600 text-sm md:text-base">
             Our expert team is dedicated to providing premium dental care with a personalized approach.
           </p>
@@ -28,7 +33,7 @@ export default function DoctorProfile({ onBookAppointment, branch }: DoctorProfi
             <div key={index} className="max-w-6xl mx-auto hover-lift">
               <div className={`flex flex-col md:flex-row gap-8 lg:gap-16 items-center md:items-start`}>
                 <div className="w-full md:w-1/2 lg:w-2/5 flex justify-center">
-                  <div className="relative w-full max-w-sm aspect-[4/5] rounded-[28px] overflow-hidden shadow-2xl border-8 border-white ring-1 ring-gray-100 shimmer-effect">
+                  <div className="relative w-full max-w-sm aspect-[4/5] rounded-[28px] overflow-hidden shadow-2xl border-8 border-white ring-1 ring-gray-100 shimmer-effect card-3d-tilt">
                     <Image
                       src={doctor.image}
                       alt={doctor.name}
@@ -43,7 +48,7 @@ export default function DoctorProfile({ onBookAppointment, branch }: DoctorProfi
                   <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 tracking-tight">
                     {doctor.name}
                   </h3>
-                  <p className="text-[#72b1b1] font-semibold text-sm md:text-base uppercase tracking-[0.2em] mb-4">
+                  <p className="text-[var(--accent-pink)] font-semibold text-sm md:text-base uppercase tracking-[0.2em] mb-4">
                     {doctor.title}
                   </p>
                   <div className="text-gray-600 text-sm md:text-base leading-relaxed space-y-4">
@@ -51,7 +56,7 @@ export default function DoctorProfile({ onBookAppointment, branch }: DoctorProfi
                     <ul className="space-y-2">
                       {doctor.highlights.map((highlight, hIndex) => (
                         <li key={hIndex} className="flex items-start gap-2 justify-center md:justify-start">
-                          <span className="text-[#72b1b1] mt-1 shrink-0">✓</span>
+                          <span className="mt-1 shrink-0 inline-flex items-center justify-center w-5 h-5 rounded-full bg-gradient-to-br from-[var(--accent-pink)] to-[var(--brand-teal)] text-white text-[11px] font-bold">✓</span>
                           <span>{highlight}</span>
                         </li>
                       ))}
@@ -67,7 +72,7 @@ export default function DoctorProfile({ onBookAppointment, branch }: DoctorProfi
         <div className="mt-20 flex justify-center">
           <button
             onClick={onBookAppointment}
-            className="bg-[#72b1b1] text-white px-10 py-4 rounded-xl font-semibold text-base hover:bg-[#5a8d8d] transition-colors shadow-lg hover:shadow-xl"
+            className="bg-[var(--brand-teal)] text-white px-10 py-4 rounded-xl font-semibold text-base hover:bg-[var(--brand-teal-dark)] transition-all btn-3d gradient-sheen"
           >
             Book Your Free Smile Consultation
           </button>

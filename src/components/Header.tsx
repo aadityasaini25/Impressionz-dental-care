@@ -62,7 +62,7 @@ export default function Header({ onBookAppointment, branch }: HeaderProps) {
           </div>
           <button
             onClick={onBookAppointment}
-            className="bg-[#72b1b1] text-white px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider hover:bg-[#5a8d8d] hover:shadow-lg hover:-translate-y-0.5 transition-all shadow-md"
+            className="bg-[var(--brand-teal)] text-white px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider hover:bg-[var(--brand-teal-dark)] hover:-translate-y-0.5 transition-all btn-3d gradient-sheen"
           >
             Book Appointment
           </button>

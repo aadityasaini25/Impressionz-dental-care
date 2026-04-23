@@ -131,8 +131,13 @@ export default function RealTransformations() {
   const allItems = [...TRANSFORMATION_ITEMS, ...TRANSFORMATION_ITEMS];
 
   return (
-    <section className="py-20 md:py-32 bg-[#f8fafb] overflow-hidden relative" id="transformations">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 mb-16">
+    <section className="relative py-20 md:py-32 overflow-hidden" id="transformations">
+      <div aria-hidden className="pointer-events-none absolute top-0 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-20"
+           style={{ background: 'radial-gradient(circle, var(--accent-pink) 0%, transparent 70%)' }} />
+      <div aria-hidden className="pointer-events-none absolute bottom-0 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-25"
+           style={{ background: 'radial-gradient(circle, var(--brand-teal) 0%, transparent 70%)' }} />
+
+      <div className="relative max-w-7xl mx-auto px-4 md:px-8 mb-16">
         <div className="text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -140,8 +145,12 @@ export default function RealTransformations() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
+            <span className="inline-flex items-center gap-2 badge-pink px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-white/90" />
+              Patient Results
+            </span>
             <h2 className="text-4xl md:text-6xl font-poppins font-bold mb-6 tracking-tight text-gray-900 leading-tight">
-              Real Smiles, <span className="text-teal">Real Transformations</span>
+              Real Smiles, <span className="text-gradient-logo">Real Transformations</span>
             </h2>
             <p className="text-gray-500 max-w-2xl mx-auto text-lg md:text-xl font-poppins font-light leading-relaxed">
               From expert orthodontic corrections to gentle kids&apos; care, see the impact of professional dentistry.
@@ -152,8 +161,8 @@ export default function RealTransformations() {
 
       <div className="relative w-full py-10">
         {/* Edge Blurs for Premium Feel */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-64 bg-gradient-to-r from-[#f8fafb] via-[#f8fafb]/80 to-transparent z-30 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-64 bg-gradient-to-l from-[#f8fafb] via-[#f8fafb]/80 to-transparent z-30 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-64 bg-gradient-to-r from-[var(--bg-page)] via-[var(--bg-page)]/80 to-transparent z-30 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-64 bg-gradient-to-l from-[var(--bg-page)] via-[var(--bg-page)]/80 to-transparent z-30 pointer-events-none" />
 
         <div 
           className="flex overflow-hidden active:cursor-grabbing"
@@ -183,7 +192,7 @@ export default function RealTransformations() {
                   }
                 }}
               >
-                <div className="bg-white rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-700 hover:-translate-y-3 border border-gray-100 overflow-hidden h-full group select-none pointer-events-none md:pointer-events-auto flex flex-col">
+                <div className="bg-white rounded-[24px] depth-stack card-3d-tilt border border-white/80 overflow-hidden h-full group select-none pointer-events-none md:pointer-events-auto flex flex-col">
                   <div className="p-3 md:p-4 flex flex-col flex-grow">
                     <div className="relative aspect-square rounded-[18px] overflow-hidden bg-gray-50 mb-0 border border-gray-50 shadow-inner">
                       {item.type === 'transformation' ? (
@@ -216,7 +225,7 @@ export default function RealTransformations() {
                       )}
                     </div>
                   </div>
-                  <div className="bg-teal py-4 px-4 mt-auto">
+                  <div className="bg-gradient-to-r from-[var(--brand-teal)] via-[var(--brand-teal-dark)] to-[var(--accent-pink)] py-4 px-4 mt-auto">
                     <h4 className="text-white font-poppins font-bold text-base md:text-lg text-center uppercase tracking-wide truncate">
                       {item.title}
                     </h4>
@@ -233,12 +242,12 @@ export default function RealTransformations() {
            initial={{ opacity: 0 }}
            whileInView={{ opacity: 1 }}
            transition={{ delay: 0.5 }}
-           className="inline-flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-100"
+           className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full depth-stack border border-white/80"
         >
           <div className="flex -space-x-2">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
-                 <div className="w-full h-full bg-[#485b51]/10 flex items-center justify-center text-[10px] font-bold text-[#485b51]">{i}</div>
+              <div key={i} className="w-8 h-8 rounded-full border-2 border-white overflow-hidden">
+                 <div className="w-full h-full bg-gradient-to-br from-[var(--accent-pink-soft)] to-[var(--brand-teal)]/20 flex items-center justify-center text-[10px] font-bold text-[var(--brand-teal-deep)]">{i}</div>
               </div>
             ))}
           </div>
