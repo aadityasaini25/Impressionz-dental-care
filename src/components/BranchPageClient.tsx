@@ -28,13 +28,25 @@ export default function BranchPageClient({ branch }: BranchPageClientProps) {
   const [showStickyCta, setShowStickyCta] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
-  // Scroll handler for sticky CTA
+  // Scroll handler for sticky CTA — rAF-throttled + idempotent setState
   useEffect(() => {
+    let ticking = false;
+    let lastVisible = false;
+
     const handleScroll = () => {
-      setShowStickyCta(window.scrollY > 300);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const next = window.scrollY > 300;
+        if (next !== lastVisible) {
+          lastVisible = next;
+          setShowStickyCta(next);
+        }
+        ticking = false;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

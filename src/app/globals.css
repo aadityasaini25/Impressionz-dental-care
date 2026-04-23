@@ -63,7 +63,14 @@
       radial-gradient(at 12% 8%, rgba(114, 177, 177, 0.12) 0px, transparent 55%),
       radial-gradient(at 88% 6%, rgba(236, 47, 138, 0.06) 0px, transparent 50%),
       radial-gradient(at 50% 100%, rgba(114, 177, 177, 0.08) 0px, transparent 60%);
-    background-attachment: fixed;
+    /* NOTE: background-attachment: fixed causes severe scroll jank on mobile
+       (repaints the full bg every frame). Use it only on larger screens. */
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      background-attachment: fixed;
+    }
   }
 }
 
@@ -810,17 +817,87 @@
   }
 }
 
-/* Section visibility – subtle fade, no big slide */
+/* Section visibility – subtle fade, no big slide.
+   Keep sections visible by default; the `.reveal` modifier opts into the
+   fade-in. This avoids a blank first paint on mobile when JS is slow. */
 section {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
   @apply py-20 md:py-32;
 }
 
+section.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+section.reveal.visible,
 section.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ========================================================================
+   Mobile performance overrides — small screens + reduced motion
+   Big blur radii, backdrop-filter, and continuous animations are the
+   dominant causes of scroll jank on phones. Neutralise them here.
+   ======================================================================== */
+
+@media (max-width: 767px) {
+  /* Disable continuous decorative animations on phones — they force
+     repaint of huge blurred layers every frame. Tiny indicator dots using
+     `animate-pulse` still look fine as static dots; the tradeoff is worth it. */
+  .float-3d,
+  .soft-float,
+  .floating,
+  .shimmer,
+  .animate-gradient,
+  .animate-pulse,
+  .animate-bounce {
+    animation: none !important;
+  }
+
+  /* Large blurred decorative blobs: keep them but cap the blur radius.
+     Anything above ~40px blur on mobile GPUs starts to drop frames on scroll. */
+  [class*="blur-[8"],
+  [class*="blur-[9"],
+  [class*="blur-[1"] {
+    filter: blur(40px) !important;
+  }
+
+  /* Backdrop-filter is very expensive on mobile GPUs. Fall back to
+     slightly more opaque solid backgrounds instead. */
+  .glass,
+  .glass-card,
+  .glass-premium,
+  .glass-header,
+  [class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Collapse huge box-shadow stacks that hurt paint on scroll */
+  .depth-stack,
+  .card-3d-tilt,
+  .layer-shadow {
+    box-shadow: 0 4px 14px -4px rgba(31, 69, 69, 0.12) !important;
+  }
+
+  /* Isolate expensive sections so scroll repaints don't cascade */
+  section {
+    contain: layout paint style;
+  }
+}
+
+/* Respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Loading animations */

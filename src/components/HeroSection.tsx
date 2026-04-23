@@ -102,6 +102,8 @@ export default function HeroSection({ onBookAppointment, branch }: HeroSectionPr
               muted
               loop
               playsInline
+              preload="metadata"
+              poster={branch?.doctor.image || "/images/hero.png"}
               key={branch?.heroVideo}
             >
               <source src={branch?.heroVideo || "/videos/herovedio.mp4"} type="video/mp4" />

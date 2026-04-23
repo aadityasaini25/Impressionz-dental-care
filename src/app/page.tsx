@@ -39,16 +39,36 @@ export default function Home() {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLDivElement>(null);
 
-  // Mouse parallax
+  // Mouse parallax — desktop only, rAF-throttled. Skipped on touch devices
+  // and small viewports where it's invisible anyway and just wastes CPU.
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const isTouch =
+      window.matchMedia('(hover: none), (pointer: coarse)').matches ||
+      window.innerWidth < 1024;
+    if (isTouch) return;
+
+    let rafId = 0;
+    let latestX = 0;
+    let latestY = 0;
+
     const handler = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
-      const x = (e.clientX / innerWidth - 0.5) * 2;
-      const y = (e.clientY / innerHeight - 0.5) * 2;
-      setMouse({ x, y });
+      latestX = (e.clientX / innerWidth - 0.5) * 2;
+      latestY = (e.clientY / innerHeight - 0.5) * 2;
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = 0;
+        setMouse({ x: latestX, y: latestY });
+      });
     };
+
     window.addEventListener('mousemove', handler, { passive: true });
-    return () => window.removeEventListener('mousemove', handler);
+    return () => {
+      window.removeEventListener('mousemove', handler);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   // Reveal sections + .fade-up elements on mount (IntersectionObserver for staggered entry)
