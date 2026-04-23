@@ -4,7 +4,7 @@ export default function ServiceHighlights() {
   const serviceData = [
     {
       title: "Invisalign & Clear Aligners",
-      image: "/images/ortho/invisalign.png",
+      image: "/images/ortho/invisalign_3d.png",
       description:
         "The world's most advanced clear aligner system. Get a perfect smile without wires or brackets.",
       benefits: [

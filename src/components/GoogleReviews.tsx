@@ -1,32 +1,12 @@
 import Image from "next/image";
+import { BranchConfig } from "@/config/branch-configs";
 
-export default function GoogleReviews() {
-  const reviews = [
-    {
-      name: "Nikunj Pujara",
-      initials: "NP",
-      date: "Recent",
-      review: "Great experience at Tooth Story dental clinic. Dr. Nikunj and Dr. Shruti are extremely knowledgeable and skilled. The clinic is welcoming, and the treatment results were excellent. I recommend everyone to visit this place for any dental concerns."
-    },
-    {
-      name: "Priyanka Shah",
-      initials: "PS",
-      date: "Recent",
-      review: "Wonderful experience, the doctor there was so kind and gentle to me. Also he did my treatment without any type of pain, also the work he did was flawless. Best Environment and positive vibe in clinic and also both doctors are good."
-    },
-    {
-      name: "Utsav",
-      initials: "UT",
-      date: "Recent",
-      review: "Best dental clinic in Vastrapur area. Very happy with Dr Nikunj for my ongoing braces treatment. His expertise & personalized approach have made the experience comfortable and enjoyable. The entire team is friendly and professional."
-    },
-    {
-      name: "Sangeeta Rai",
-      initials: "SR",
-      date: "Recent",
-      review: "I visited Tooth Story a week ago & had an excellent experience. The treatment was smooth & completely painless, & my dental problems are fully resolved. Doctors are highly skilled & incredibly friendly, which made the whole process very comfortable."
-    }
-  ];
+interface GoogleReviewsProps {
+  branch?: BranchConfig;
+}
+
+export default function GoogleReviews({ branch }: GoogleReviewsProps) {
+  const reviews = branch?.reviews || [];
 
   return (
     <section className="py-20 md:py-32 px-4 md:px-8 lg:px-12 bg-gray-50 border-t border-gray-100">
@@ -61,7 +41,7 @@ export default function GoogleReviews() {
                   <span key={i}>★</span>
                 ))}
               </div>
-              <p className="text-gray-600 leading-relaxed font-light flex-grow">{review.review}</p>
+              <p className="text-gray-600 leading-relaxed font-light flex-grow text-sm">{review.review}</p>
             </div>
           ))}
         </div>

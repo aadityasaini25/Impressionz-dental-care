@@ -1,102 +1,143 @@
 import Image from "next/image";
+import { BranchConfig } from "@/config/branch-configs";
 
-export default function Footer() {
+interface FooterProps {
+  branch?: BranchConfig;
+}
+
+export default function Footer({ branch }: FooterProps) {
+  const primaryPhone = branch ? branch.contact.phones[0] : "";
+  const address = branch ? branch.contact.address : "";
+  const timings = branch ? branch.contact.timings : "";
+  const email = branch ? branch.contact.email : "";
+  const mapEmbed = branch ? branch.contact.googleMapEmbed : "";
+  
   return (
     <footer className="bg-[#2d3e40] border-t border-white/5 pt-8 pb-4 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="text-center mb-8">
-          <div className="bg-white p-2 rounded-xl inline-block mb-4 shadow-xl">
-            <Image
-              src="/images/logo.webp"
-              alt="Tooth Story – Dental Clinic For All"
-              width={100}
-              height={25}
-              className="h-auto opacity-100"
-              style={{ width: 'auto', height: 'auto' }}
-            />
+        <div className="text-center mb-12">
+          <div className="bg-white p-3 rounded-2xl inline-block mb-4 shadow-2xl">
+             <Image
+               src="/images/logo.webp"
+               alt="Impressionz Dental Care"
+               width={180}
+               height={55}
+               className="h-auto w-auto opacity-100"
+               style={{ width: 'auto', height: 'auto' }}
+             />
           </div>
           <p className="text-gray-400 max-w-2xl mx-auto font-light leading-relaxed text-xs md:text-sm">
-            Tooth Story: Specialist Orthodontic & Pediatric Dental Care. Premium Invisalign provider and Kids dental specialists in Ahmedabad.
+            Impressionz Dental Care: Affordable, Tech-driven, and Painless Dentistry. Your trusted multi-location clinic for expert implants and orthodontic care.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6 text-center md:text-left mb-8">
-          <div className="space-y-2">
-            <h3 className="font-bold text-white text-base border-b border-gray-800 pb-1">Contact Us</h3>
-            <div className="space-y-1 mt-2">
-              <a href="tel:+919023523178" className="block text-[#72b1b1] font-bold text-lg hover:scale-105 transition-transform inline-block">+91 90235 23178</a>
-              <p className="text-gray-300 font-medium text-xs">Tooth Story Dental Clinic</p>
-              <a href="mailto:info@toothstory.co.in" className="text-xs hover:text-[#72b1b1] transition-colors block">info@toothstory.co.in</a>
+
+        <div className="grid md:grid-cols-3 gap-10 text-center md:text-left mb-12 border-b border-white/5 pb-12">
+          <div className="space-y-4">
+            <h3 className="font-bold text-white text-base border-b border-white/5 pb-2 uppercase tracking-widest text-[11px]">Contact Us</h3>
+            <div className="space-y-2 mt-4">
+              <a href={`tel:${primaryPhone.replace(/\s/g, '')}`} className="block text-[#72b1b1] font-black text-xl hover:scale-105 transition-all inline-block tracking-tight">{primaryPhone}</a>
+              <p className="text-gray-300 font-semibold text-xs">Impressionz Dental Care {branch ? `- ${branch.name}` : ''}</p>
+              <a href={`mailto:${email}`} className="text-xs text-gray-400 hover:text-[#72b1b1] transition-colors block italic">{email}</a>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <h3 className="font-bold text-white text-base border-b border-gray-800 pb-1">Clinic Hours</h3>
-            <div className="flex items-start justify-center md:justify-start gap-2 mt-2">
-              <span className="text-[#72b1b1] text-lg">🕒</span>
-              <div className="text-gray-300 space-y-0.5 text-xs">
-                <p className="font-bold">Mon–Sat</p>
-                <p>10:30 AM – 8:30 PM</p>
-                <p className="font-bold mt-1">Sunday</p>
-                <p>By Appointment Only</p>
+          <div className="space-y-4">
+            <h3 className="font-bold text-white text-base border-b border-white/5 pb-2 uppercase tracking-widest text-[11px]">Clinic Hours</h3>
+            <div className="flex items-start justify-center md:justify-start gap-3 mt-4">
+              <div className="bg-[#72b1b1]/10 p-2 rounded-lg">
+                <span className="text-[#72b1b1] text-xl">🕒</span>
+              </div>
+              <div className="text-gray-300 space-y-1 text-xs">
+                <p className="font-bold text-white">{timings}</p>
+                <p className="text-gray-400">Sunday: Closed / By Appointment</p>
               </div>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <h3 className="font-bold text-white text-base border-b border-gray-800 pb-1">Our Location</h3>
-            <a
-              href="https://maps.app.goo.gl/ZkrPk6MmNcuwAn6K9"
+          <div className="space-y-4">
+            <h3 className="font-bold text-white text-base border-b border-white/5 pb-2 uppercase tracking-widest text-[11px]">Our Location</h3>
+            <a 
+              href={branch?.contact.googleMapsLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-all group block text-xs mt-2"
+              className="hover:text-white transition-all group block text-xs mt-4"
             >
-              <div className="flex items-start justify-center md:justify-start gap-2">
-                <span className="text-xl">📍</span>
-                <span className="text-gray-300 leading-relaxed group-hover:text-[#72b1b1] transition-colors">
-                  House No. 8, 1st Floor, Sunrise Park,<br />
-                  Next to Sales India Showroom,<br />
-                  Drive-In Road, Gurukul, Ahmedabad
+              <div className="flex items-start justify-center md:justify-start gap-3">
+                <div className="bg-[#72b1b1]/10 p-2 rounded-lg group-hover:bg-[#72b1b1] transition-colors">
+                  <span className="text-xl group-hover:filter group-hover:brightness-0 group-hover:invert transition-all">📍</span>
+                </div>
+                <span className="text-gray-300 leading-relaxed group-hover:text-[#72b1b1] transition-colors text-left">
+                  {address.split(' | ').map((line, idx) => (
+                    <span key={idx} className="block">{line}</span>
+                  ))}
+                  <span className="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity ml-1 font-bold">VIEW ON MAPS ↗</span>
                 </span>
               </div>
             </a>
           </div>
         </div>
 
-        {/* Payment Methods and Maps Embed */}
-        <div className="grid md:grid-cols-2 gap-4 items-start">
-          <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-            <h3 className="font-bold text-gray-900 mb-2 text-sm border-b border-gray-100 pb-1">Payment &amp; Billing</h3>
-            <ul className="grid grid-cols-2 gap-2 mt-2">
+        {/* Payment Methods and Maps Embed Row */}
+        <div className="grid lg:grid-cols-2 gap-6 items-stretch mb-8">
+          {/* Payment Section */}
+          <div className="bg-white p-6 rounded-[28px] shadow-sm flex flex-col justify-center">
+            <h3 className="font-bold text-gray-900 mb-6 text-sm flex items-center gap-2">
+              <span className="w-1.5 h-6 bg-[#72b1b1] rounded-full" />
+              Payment & Billing
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
               {[
-                { name: "UPI / GPay", icon: "📱" },
-                { name: "Cash", icon: "💵" },
-                { name: "EMI for Invisalign", icon: "🏦" }
+                { name: "UPI / GPay / Card", icon: "📱" },
+                { name: "Cash / Net Banking", icon: "💵" },
+                { name: "EMI Available", icon: "🏦" },
+                { name: "No-Cost EMI", icon: "💳" }
               ].map((method, idx) => (
-                <li key={idx} className="flex items-center gap-1.5 text-gray-600 text-[11px] sm:text-xs">
-                  <span>{method.icon}</span>
-                  {method.name}
-                </li>
+                <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100 hover:border-[#72b1b1]/30 transition-colors group">
+                  <span className="group-hover:scale-110 transition-transform">{method.icon}</span>
+                  <span className="text-gray-600 text-[11px] font-medium uppercase tracking-wider">{method.name}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
-          <div className="bg-gray-100 rounded-xl overflow-hidden h-[160px] shadow-inner border border-gray-200">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29371.245939171655!2d72.50004623631145!3d23.045581809035593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e854e927381b5%3A0xed786f789620a502!2sTooth%20Story%20-%20Dental%20Clinic%20For%20All%20%7C%20Braces%20%7C%20Invisalign%20%7C%20Aligners%20%7C%20Kids%20Dentist%20%7C%20Implants!5e0!3m2!1sen!2sin!4v1773687425279!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen={true}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Tooth Story - Ahmedabad"
-              className="grayscale hover:grayscale-0 transition-all duration-700"
-            ></iframe>
+          {/* Map Preview */}
+          <div className="rounded-[28px] overflow-hidden h-[220px] shadow-xl border-4 border-white relative group">
+            {/* Clickable Overlay */}
+            <a 
+              href={branch?.contact.googleMapsLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0 z-20 cursor-pointer"
+              title="Open in Google Maps"
+            ></a>
+            
+            {mapEmbed ? (
+              <iframe
+                src={mapEmbed}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={`Impressionz - ${branch?.name}`}
+                className="grayscale group-hover:grayscale-0 transition-all duration-1000 z-10"
+              ></iframe>
+            ) : (
+              <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold uppercase tracking-widest text-xs">
+                Map View Coming Soon
+              </div>
+            )}
+            <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-md text-[10px] font-black text-[#2d3e40] uppercase tracking-widest z-30 border border-white group-hover:bg-[#72b1b1] group-hover:text-white transition-colors">
+              Maps View ↗
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-4 text-center text-gray-500 text-[10px] sm:text-xs">
-          <p>&copy; {new Date().getFullYear()} Tooth Story – Dental Clinic For All. All rights reserved.</p>
+        <div className="border-t border-white/5 mt-12 pt-6 text-center text-gray-500 text-[10px] sm:text-xs">
+          <p className="flex items-center justify-center gap-1">
+            &copy; {new Date().getFullYear()} Impressionz Dental Care. Made with 🤍 for beautiful smiles.
+          </p>
         </div>
       </div>
     </footer>

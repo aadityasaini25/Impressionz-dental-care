@@ -6,6 +6,7 @@ export { default as CTABox } from './CTABox';
 export { default as GoogleReviews } from './GoogleReviews';
 export { default as VideoTestimonial } from './VideoTestimonial';
 export { default as DoctorProfile } from './DoctorProfile';
+export { default as OneRoofCare } from './OneRoofCare';
 export { default as ClinicPhotos } from './ClinicPhotos';
 export { default as FAQSection } from './FAQSection';
 export { default as RealTransformations } from './RealTransformations';

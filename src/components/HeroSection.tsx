@@ -1,9 +1,19 @@
+import { BranchConfig } from "@/config/branch-configs";
 
 interface HeroSectionProps {
   onBookAppointment: () => void;
+  branch?: BranchConfig;
 }
 
-export default function HeroSection({ onBookAppointment }: HeroSectionProps) {
+export default function HeroSection({ onBookAppointment, branch }: HeroSectionProps) {
+  const heroTitle = branch ? branch.heroTitle : "Affordable Painless Dentistry";
+  const titleParts = heroTitle.split(' ');
+  const firstPart = titleParts.slice(0, 2).join(' ');
+  const secondPart = titleParts.slice(2).join(' ');
+
+  const implantPrice = branch ? branch.pricing.implant : "₹27,000";
+  const primaryPhone = branch ? branch.contact.phones[0] : "";
+
   return (
     <section className="relative pt-24 pb-20 md:pt-32 md:pb-36 px-4 md:px-12 lg:px-16 max-w-7xl mx-auto overflow-hidden">
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce opacity-40">
@@ -12,31 +22,31 @@ export default function HeroSection({ onBookAppointment }: HeroSectionProps) {
       </div>
 
       <div className="text-center mb-10 md:mb-12 fade-up">
-        <p className="text-[#72b1b1] font-semibold text-sm uppercase tracking-[0.2em] mb-4">Tooth Story – Dental Clinic For All</p>
+        <p className="text-[#72b1b1] font-semibold text-sm uppercase tracking-[0.2em] mb-4">Impressionz Dental Care – {branch?.name || "Mumbai"}</p>
 
         <div className="inline-block mb-10 fade-up" style={{ animationDelay: '200ms' }}>
           <div className="bg-white/80 backdrop-blur-md border border-[#72b1b1]/20 px-8 py-4 rounded-[28px] shadow-2xl shadow-teal-500/10 flex items-center gap-5 hover:scale-105 transition-all duration-500 group">
             <div className="bg-[#72b1b1]/10 p-3 rounded-2xl group-hover:bg-[#72b1b1]/20 transition-colors">
-              <span className="text-2xl">✨</span>
+              <span className="text-2xl">🦷</span>
             </div>
             <div className="text-left">
-              <p className="text-[10px] text-[#72b1b1] font-black uppercase tracking-[0.2em] mb-0.5">Limited Period Offer</p>
+              <p className="text-[10px] text-[#72b1b1] font-black uppercase tracking-[0.2em] mb-0.5">High Quality Dental Implants</p>
               <h3 className="text-gray-900 font-black text-lg md:text-2xl leading-none">
-                Upto <span className="text-[#72b1b1]">20% OFF</span> on Invisalign
+                Affordable & <span className="text-[#72b1b1]">Painless</span>
               </h3>
               <p className="text-gray-500 font-medium text-[11px] md:text-sm mt-1">
-                Prices starting from only <span className="text-gray-900 font-bold">₹90,000*</span>
+                Implants starting from only <span className="text-gray-900 font-bold">{implantPrice}</span>
               </p>
             </div>
           </div>
         </div>
 
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 mb-6 leading-tight">
-          Building Bright Smiles<br className="hidden md:block" />
-          <span className="text-gradient-teal">from the Start</span>
+          {firstPart}<br className="hidden md:block" />
+          <span className="text-gradient-teal">{secondPart}</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
-          Where we combine cutting-edge technology with compassionate care to craft perfect smiles with precision and comfort. Specializing in Braces, Aligners, and Pediatric Dentistry.
+          Where we combine cutting-edge technology with compassionate care to craft perfect smiles with precision and comfort. Everything under one roof.
         </p>
       </div>
 
@@ -49,9 +59,9 @@ export default function HeroSection({ onBookAppointment }: HeroSectionProps) {
               muted
               loop
               playsInline
-              poster="/images/hero.png"
+              key={branch?.heroVideo}
             >
-              <source src="/videos/herovedio.mp4" type="video/mp4" />
+              <source src={branch?.heroVideo || "/videos/herovedio.mp4"} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
@@ -65,11 +75,11 @@ export default function HeroSection({ onBookAppointment }: HeroSectionProps) {
               Our Specializations
             </h2>
             <ul className="space-y-6 mb-12 text-[15px] text-gray-700 font-medium">
-              {[
-                "Certified Invisalign Provider",
-                "Junior Aligners & Kids Expanders",
-                "iTero Scanner - See Your Future Smile"
-              ].map((item, i) => (
+              {(branch?.usps.slice(0, 3) || [
+                "Expert Dental Care",
+                "Advanced Painless Technology",
+                "All Treatments Under One Roof"
+              ]).map((item, i) => (
                 <li key={i} className="flex items-center gap-4 group">
                   <span className="w-2 h-2 rounded-full bg-[#72b1b1] group-hover:scale-150 transition-transform duration-300" />
                   {item}
@@ -80,7 +90,7 @@ export default function HeroSection({ onBookAppointment }: HeroSectionProps) {
               onClick={onBookAppointment}
               className="w-full bg-[#2d3e40] text-white px-6 py-5 rounded-2xl text-base font-bold hover:bg-[#1a2526] transition-all hover:shadow-xl hover:-translate-y-1 active:scale-95"
             >
-              Get Your Smile Simulation
+              Book Free Consultation
             </button>
           </div>
         </div>
@@ -94,10 +104,10 @@ export default function HeroSection({ onBookAppointment }: HeroSectionProps) {
           Book Appointment
         </button>
         <a
-          href="tel:+919023523178"
+          href={`tel:${primaryPhone.replace(/\s/g, '')}`}
           className="bg-white text-[#72b1b1] border-2 border-[#72b1b1]/30 py-4 px-12 rounded-2xl font-bold text-lg text-center hover:bg-teal-50 transition-all hover:scale-105 active:scale-95 md:min-w-[240px]"
         >
-          Call +91 90235 23178
+          Call {primaryPhone}
         </a>
       </div>
     </section>

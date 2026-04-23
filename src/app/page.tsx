@@ -1,133 +1,67 @@
 'use client';
 
-import { useEffect, useState } from "react";
-
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import DoctorProfile from "@/components/DoctorProfile";
-import ServiceHighlights from "@/components/ServiceHighlights";
-import FAQSection from "@/components/FAQSection";
-import RealTransformations from "@/components/RealTransformations";
-import ClinicPhotos from "@/components/ClinicPhotos";
-import GoogleReviews from "@/components/GoogleReviews";
-import CTABox from "@/components/CTABox";
-import Footer from "@/components/Footer";
-import StickyCTA from "@/components/StickyCTA";
-import PopupForm from "@/components/PopupForm";
+import Link from "next/link";
+import Image from "next/image";
 import BackgroundGraphics from "@/components/BackgroundGraphics";
+import { branches } from "@/config/branch-configs";
 
 export default function Home() {
-  const [showStickyCta, setShowStickyCta] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
-  const [remainingSeconds, setRemainingSeconds] = useState(19 * 60 + 49);
-
-  const minutes = Math.floor(remainingSeconds / 60);
-  const seconds = remainingSeconds % 60;
-
-  // Countdown timer effect
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setRemainingSeconds((prev) => {
-        if (prev > 0) {
-          return prev - 1;
-        }
-        return 19 * 60 + 49;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  // Scroll handler for sticky CTA
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowStickyCta(window.scrollY > 300);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Show popup after a longer delay so it feels less intrusive
-  useEffect(() => {
-    const timer = setTimeout(() => setShowPopup(true), 12000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Lock body scroll when popup is open
-  useEffect(() => {
-    if (!showPopup) {
-      return;
-    }
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [showPopup]);
-  // Section visibility observer
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.05,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('section, .fade-up').forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const openPopup = () => {
-    setShowPopup(true);
-  };
-
-  const closePopup = () => {
-    setShowPopup(false);
-  };
-
   return (
-    <div className="bg-medical-light min-h-screen">
+    <div className="bg-medical-light min-h-screen flex flex-col items-center justify-center p-4">
       <BackgroundGraphics />
+      
+      <div className="relative z-10 text-center max-w-4xl mx-auto">
+        <div className="bg-white p-4 rounded-2xl shadow-xl inline-block mb-8 border border-gray-100">
+           <Image
+             src="/images/logo.webp"
+             alt="Impressionz Dental Care"
+             width={200}
+             height={60}
+             className="h-auto w-auto"
+           />
+        </div>
+        
+        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+          Welcome to <span className="text-teal">Impressionz</span>
+        </h1>
+        <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+          Choose your nearest branch for specialized, affordable, and painless dental care in Mumbai.
+        </p>
+        
+        <div className="grid md:grid-cols-2 gap-8 w-full max-w-2xl mx-auto">
+          <Link 
+            href="/borivali"
+            className="group bg-white p-8 rounded-[32px] shadow-lg hover:shadow-2xl transition-all border border-gray-100 flex flex-col items-center text-center hover:-translate-y-2"
+          >
+            <div className="w-16 h-16 bg-[#72b1b1]/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-[#72b1b1] group-hover:text-white transition-colors">
+              📍
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Borivali West</h2>
+            <p className="text-gray-500 mb-6 italic">Led by Dr. Sandeep Singh</p>
+            <span className="text-[#72b1b1] font-bold uppercase tracking-widest text-sm flex items-center gap-2">
+              Visit Clinic <span className="group-hover:translate-x-2 transition-transform">→</span>
+            </span>
+          </Link>
 
-      {/* Main Content */}
-      <div className="relative z-10">
-        <Header onBookAppointment={openPopup} />
-        <HeroSection onBookAppointment={openPopup} />
-        <WhyChooseUs />
-        <DoctorProfile onBookAppointment={openPopup} />
-        <ServiceHighlights />
-        <RealTransformations />
-        <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent max-w-4xl mx-auto opacity-50" />
-        <FAQSection />
-        <ClinicPhotos onBookAppointment={openPopup} />
-        <GoogleReviews />
-        <CTABox onBookAppointment={openPopup} />
-        <Footer />
+          <Link 
+            href="/andheri"
+            className="group bg-white p-8 rounded-[32px] shadow-lg hover:shadow-2xl transition-all border border-gray-100 flex flex-col items-center text-center hover:-translate-y-2"
+          >
+            <div className="w-16 h-16 bg-[#72b1b1]/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-[#72b1b1] group-hover:text-white transition-colors">
+              📍
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Andheri West</h2>
+            <p className="text-gray-500 mb-6 italic">Led by Dr. Priya Singh</p>
+            <span className="text-[#72b1b1] font-bold uppercase tracking-widest text-sm flex items-center gap-2">
+              Visit Clinic <span className="group-hover:translate-x-2 transition-transform">→</span>
+            </span>
+          </Link>
+        </div>
+        
+        <div className="mt-16 text-gray-400 text-sm font-medium uppercase tracking-[0.2em]">
+          Mumbai's Trusted Multi-Location Dental Provider
+        </div>
       </div>
-
-      {/* Interactive Components */}
-      <StickyCTA isVisible={showStickyCta} onBookAppointment={openPopup} />
-      <PopupForm
-        isOpen={showPopup}
-        onClose={closePopup}
-        minutes={minutes}
-        seconds={seconds}
-      />
     </div>
   );
 }

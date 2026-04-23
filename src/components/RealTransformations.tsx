@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, useAnimationFrame, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { motion, useAnimationFrame, useMotionValue } from 'framer-motion';
+import { useRef, useState } from 'react';
 
 type TransformationItem = {
   type: 'transformation';
@@ -24,118 +24,52 @@ type Item = TransformationItem | KidsItem;
 
 const TRANSFORMATION_ITEMS: Item[] = [
   {
-    type: 'kids',
-    image: '/img/before-after/certifficate1.png',
-    title: 'Kids Care Excellence',
-    badge: 'Kids Care'
-  },
-  {
-    type: 'kids',
-    image: '/img/before-after/certifficate2.png',
-    title: 'Gentle Dentistry',
-    badge: 'Kids Care'
-  },
-  {
     type: 'transformation',
-    after: '/img/before-after/beforeafter1.png',
-    title: 'Smile Correction',
-    description: 'Complete smile transformation'
-  },
-  {
-    type: 'transformation',
-    after: '/img/before-after/beforeafter2.png',
-    title: 'Advanced Correction',
-    description: 'Precision orthodontics'
-  },
-  {
-    type: 'transformation',
-    after: '/img/before-after/beforeafter3.png',
-    title: 'Orthodontic Excellence',
-    description: 'Metal braces transformation'
-  },
-  {
-    type: 'transformation',
-    after: '/img/before-after/beforeafter4.png',
+    after: '/img/before-after/1.JPEG',
     title: 'Precision Aligners',
-    description: 'Clear path to a perfect smile'
+    description: 'Expert clear aligner transformation'
   },
   {
     type: 'transformation',
-    after: '/img/before-after/beforeafter5.png',
-    title: 'Smile Enhancement',
-    description: 'Beautiful aesthetic results'
+    after: '/img/before-after/2.JPEG',
+    title: 'Smile Correction',
+    description: 'Beautiful orthodontic results'
   },
   {
     type: 'transformation',
-    after: '/img/before-after/beforeafter6.png',
+    after: '/img/before-after/3.JPEG',
+    title: 'Adult Braces',
+    description: 'Functional dental correction'
+  },
+  {
+    type: 'transformation',
+    after: '/img/before-after/4.JPEG',
+    title: 'Advanced Orthodontics',
+    description: 'Total smile makeover'
+  },
+  {
+    type: 'transformation',
+    after: '/img/before-after/5.JPEG',
     title: 'Teeth Alignment',
     description: 'Gap and alignment resolution'
   },
   {
     type: 'transformation',
-    after: '/img/before-after/beforeafter7.png',
-    title: 'Deep Bite Correction',
-    description: 'Functional dental correction'
-  },
-  {
-    type: 'transformation',
-    after: '/img/before-after/beforeafter8.png',
-    title: 'Invisalign Masterclass',
-    description: 'Total smile transformation'
-  },
-  {
-    type: 'transformation',
-    after: '/img/before-after/beforeafter9.png',
-    title: 'Aesthetic Dentistry',
+    after: '/img/before-after/6.JPEG',
+    title: 'Aesthetic Results',
     description: 'Premium smile redesign'
   },
   {
     type: 'transformation',
-    after: '/img/before-after/beforeafter10.png',
-    title: 'Ceramic Correction',
-    description: 'Discrete orthodontic results'
-  },
-  {
-    type: 'transformation',
-    after: '/img/before-after/beforeafter11.png',
-    title: 'Modern Orthodontics',
-    description: 'Advanced clinical results'
-  },
-  {
-    type: 'transformation',
-    after: '/img/before-after/beforeafter12.png',
-    title: 'Smile Rehabilitation',
-    description: 'Complete dental makeover'
-  },
-  {
-    type: 'transformation',
-    after: '/img/before-after/beforeafter13.png',
+    after: '/img/before-after/7.JPEG',
     title: 'Precision Correction',
-    description: 'Aligner transformation'
+    description: 'Healthy, beautiful alignment'
   },
   {
     type: 'transformation',
-    after: '/img/before-after/beforeafter14.png',
-    title: 'Functional Alignment',
-    description: 'Health and aesthetics combined'
-  },
-  {
-    type: 'transformation',
-    after: '/img/before-after/beforeafter16.png',
-    title: 'Adult Orthodontics',
-    description: 'Professional transformation'
-  },
-  {
-    type: 'transformation',
-    after: '/img/before-after/beforeafter17.png',
-    title: 'Symmetry Restoration',
-    description: 'Balanced smile results'
-  },
-  {
-    type: 'transformation',
-    after: '/img/before-after/beforeafter18.png',
-    title: 'Premier Braces',
-    description: 'Traditional excellence'
+    after: '/img/before-after/8.JPG',
+    title: 'Total Transformation',
+    description: 'Expert clinical outcome'
   }
 ];
 
@@ -242,7 +176,7 @@ export default function RealTransformations() {
                 key={`${item.title}-${idx}`} 
                 className="flex-shrink-0 w-[240px] md:w-[340px]"
                 onDragStart={(e) => e.preventDefault()} // Prevent native ghost image
-                onClick={(e) => {
+                onClick={() => {
                   // Prevent click if we were dragging (standard UI pattern)
                   if (!lastInteractionTime.current || Date.now() - lastInteractionTime.current < 100) {
                     // Actual click logic here if needed
