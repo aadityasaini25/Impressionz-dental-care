@@ -34,6 +34,24 @@ const faqs: FAQItem[] = [
     answer:
       "Since the aligners are removable, there are zero dietary restrictions. Simply remove them to eat, brush, and floss.",
     benefit: "Maintain your lifestyle while your smile improves every day.",
+  },
+  {
+    question: "What are dental implants and are they permanent?",
+    answer:
+      "Dental implants are titanium posts that act as permanent roots for replacement teeth. They fuse with your jawbone, making them the most stable and lifelong solution for missing teeth.",
+    benefit: "Regain your natural smile and bite for a lifetime.",
+  },
+  {
+    question: "Is the dental implant procedure painful?",
+    answer:
+      "Not at all. The procedure is performed under local anesthesia. Most of our patients find the process surprisingly comfortable and less painful than a simple tooth extraction.",
+    benefit: "Experience a completely painless restoration with our gentle techniques.",
+  },
+  {
+    question: "How long does the dental implant process take?",
+    answer:
+      "The total process typically takes 3 to 6 months. This allows the implant to safely fuse with your bone (osseointegration) before the final, custom-made crown is attached.",
+    benefit: "Get a rock-solid foundation for a tooth that feels exactly like your own.",
   }
 ];
 

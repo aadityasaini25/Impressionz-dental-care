@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     siteName: "Impressionz Dental Care",
     images: [
       {
-        url: '/images/logo.webp',
+        url: '/images/logo.png',
         width: 1200,
         height: 630,
         alt: "Impressionz Dental Care",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "Impressionz Dental Care – Painless Dentistry in Mumbai",
     description:
       "Borivali West & Andheri West. Implants, Invisalign, braces, cosmetic dentistry and more.",
-    images: ['/images/logo.webp'],
+    images: ['/images/logo.png'],
   },
   robots: {
     index: true,

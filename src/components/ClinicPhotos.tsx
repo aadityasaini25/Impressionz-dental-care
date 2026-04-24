@@ -82,19 +82,80 @@ export default function ClinicPhotos({ onBookAppointment, branch }: ClinicPhotos
           Our <span className="text-gradient-logo">Clinic</span> {branch ? `- ${branch.name}` : ''}
         </h2>
         <div className="w-16 h-0.5 bg-gradient-to-r from-[var(--accent-pink)] to-[var(--brand-teal)] rounded-full mb-4 mx-auto md:mx-0" />
-        <a
-          href={branch?.contact.googleMapsLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-600 max-w-2xl mb-12 mx-auto md:mx-0 space-y-1 block hover:text-[var(--brand-teal)] group/gal transition-colors"
-        >
-          {address.split(" | ").map((line, idx) => (
-            <p key={idx} className="flex items-center gap-2 justify-center md:justify-start">
-              {line}
-              {idx === 0 && <span className="text-[10px] opacity-0 group-hover/gal:opacity-100 transition-opacity font-bold uppercase tracking-widest bg-[var(--brand-teal)] text-white px-2 py-0.5 rounded ml-2">Open in Maps ↗</span>}
-            </p>
-          ))}
-        </a>
+        {/* Address card — mobile-first. Clear hierarchy across the three
+            segments (building, landmark, area+pincode) and an always-visible
+            "Open in Maps" action (hover-only was invisible on phones). */}
+        {(() => {
+          const lines = address.split(" | ");
+          const [building, landmark, area] = [lines[0], lines[1], lines[2]];
+          return (
+            <a
+              href={branch?.contact.googleMapsLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block mb-12 mx-auto md:mx-0 w-full max-w-xl text-left rounded-2xl bg-white/70 border border-[var(--brand-teal)]/15 p-4 sm:p-5 md:p-6 hover:border-[var(--brand-teal)]/40 hover:bg-white transition-colors"
+            >
+              <div className="flex items-start gap-3 sm:gap-4">
+                {/* Pin badge */}
+                <div
+                  aria-hidden
+                  className="shrink-0 mt-0.5 w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center"
+                  style={{
+                    background:
+                      'linear-gradient(135deg, rgba(236,47,138,0.12) 0%, rgba(114,177,177,0.14) 100%)',
+                  }}
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-[var(--brand-teal-deep)]"
+                  >
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </div>
+
+                {/* Address lines */}
+                <div className="flex-1 min-w-0">
+                  {building && (
+                    <p className="font-semibold text-gray-900 text-[15px] sm:text-base leading-snug break-words">
+                      {building}
+                    </p>
+                  )}
+                  {landmark && (
+                    <p className="text-gray-500 text-[13px] sm:text-sm mt-1 leading-snug break-words">
+                      {landmark}
+                    </p>
+                  )}
+                  {area && (
+                    <p className="text-gray-800 text-[13.5px] sm:text-sm mt-1.5 leading-snug font-medium break-words">
+                      {area}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Action row — always visible on mobile */}
+              <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100 flex items-center justify-between gap-2">
+                <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.15em] text-[var(--brand-teal-deep)]">
+                  Open in Google Maps
+                </span>
+                <span
+                  aria-hidden
+                  className="inline-flex items-center gap-1 text-[var(--brand-teal-deep)] text-sm transition-transform group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </div>
+            </a>
+          );
+        })()}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-16 text-left">
           {clinicImages.map((img, i) => (

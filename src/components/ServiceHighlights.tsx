@@ -15,27 +15,27 @@ export default function ServiceHighlights() {
       ],
     },
     {
-      title: "Junior Aligners for Kids",
-      image: "/images/ortho/junior.png",
+      title: "Cosmetic Smile Redesign",
+      image: "/images/Aesthetic.jpg.webp",
       description:
-        "Specialized clear aligner treatment designed specifically for the unique needs of growing children.",
+        "Transform your smile with our premium cosmetic solutions, including porcelain veneers, composite bonding, and professional whitening.",
       benefits: [
-        "Designed for kids & teens",
-        "Comfortable & wire-free",
-        "Corrects overcrowding & gaps",
-        "Gentle on young teeth",
+        "Digital Smile Design",
+        "Stain-resistant veneers",
+        "Correction of chips & gaps",
+        "Natural, radiant results",
       ],
     },
     {
-      title: "Kids Jaw Expanders",
-      image: "/images/FAQimage.png",
+      title: "Full Mouth Rehabilitation",
+      image: "/images/implant/all_in.png",
       description:
-        "Early intervention to create space and guide jaw growth for a healthier, straighter smile.",
+        "Comprehensive restoration for patients with multiple missing or worn teeth, combining implants, crowns, and bridges for total function.",
       benefits: [
-        "Prevent future extractions",
-        "Improve speech and breathing",
-        "Correct crossbites early",
-        "Painless orthopedic growth",
+        "Complete bite restoration",
+        "Improved chewing function",
+        "Youthful facial support",
+        "Expert multidisciplinary care",
       ],
     },
     {

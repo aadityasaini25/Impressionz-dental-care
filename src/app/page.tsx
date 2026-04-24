@@ -20,7 +20,7 @@ const extra: Record<string, BranchStats> = {
       { value: '15K+', label: 'Smiles' },
       { value: '4.9★', label: 'Rating' },
     ],
-    specialties: ['Invisalign', 'Braces', 'Implants', 'Kids'],
+    specialties: ['Invisalign', 'Braces', 'Implants', 'Cosmetic'],
     accentIcon: '🦷',
   },
   andheri: {
@@ -30,7 +30,7 @@ const extra: Record<string, BranchStats> = {
       { value: 'NYU', label: 'Certified' },
       { value: '4.9★', label: 'Rating' },
     ],
-    specialties: ['Cosmetic', 'Full-mouth', 'Scanners', 'Implants'],
+    specialties: ['Cosmetic', 'Full-mouth', 'Aligners', 'Implants'],
     accentIcon: '✨',
   },
 };
@@ -190,13 +190,13 @@ export default function Home() {
 
       {/* === Top bar === */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 pt-5 sm:pt-6 md:pt-10 flex items-center justify-between gap-3">
-        <div className="bg-white px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl depth-stack inline-flex items-center gap-3 shrink-0">
+        <div className="flex items-center shrink-0">
           <Image
-            src="/images/logo.webp"
+            src="/images/logo.png"
             alt="Impressionz Dental Care"
-            width={120}
-            height={40}
-            className="h-8 sm:h-9 md:h-10 w-auto"
+            width={160}
+            height={55}
+            className="h-10 sm:h-12 md:h-16 w-auto"
             priority
           />
         </div>
@@ -283,8 +283,8 @@ export default function Home() {
                   {/* Doctor photo background */}
                   <div className="absolute inset-0">
                     <Image
-                      src={branch.doctor.image}
-                      alt={branch.doctor.name}
+                      src={branch.doctors[0].image}
+                      alt={branch.doctors[0].name}
                       fill
                       className="object-cover object-top transition-transform duration-[1.5s] group-hover:scale-110"
                       sizes="(max-width: 768px) 100vw, 50vw"
@@ -343,10 +343,10 @@ export default function Home() {
                       {branch.name}
                     </h2>
                     <p className="text-sm md:text-base text-white/85 mb-1">
-                      Led by <span className="font-bold text-white">{branch.doctor.name}</span>
+                      Led by <span className="font-bold text-white">{branch.doctors[0].name}</span>
                     </p>
                     <p className="text-[11px] md:text-xs text-white/70 italic mb-5 sm:mb-6 max-w-md">
-                      {branch.doctor.title}
+                      {branch.doctors[0].title}
                     </p>
 
                     <div className="flex items-center justify-between gap-3 sm:gap-4">

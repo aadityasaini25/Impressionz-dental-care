@@ -41,13 +41,13 @@ export default function Header({ onBookAppointment, branch }: HeaderProps) {
     }`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
         <div className="flex items-center gap-4 md:gap-8">
-          <div className="bg-white p-1 rounded-xl shadow-sm border border-gray-100">
+          <div className="flex items-center">
             <Image
-              src="/images/logo.webp"
+              src="/images/logo.png"
               alt="Impressionz Dental Care"
-              width={160}
-              height={50}
-              className="h-10 md:h-12 w-auto"
+              width={200}
+              height={60}
+              className="h-12 md:h-16 w-auto"
               priority
             />
           </div>

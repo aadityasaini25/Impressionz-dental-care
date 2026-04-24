@@ -10,7 +10,7 @@ export type DoctorConfig = {
 export type BranchConfig = {
   slug: 'borivali' | 'andheri';
   name: string;
-  doctor: DoctorConfig;
+  doctors: DoctorConfig[];
   clinicImages: { src: string; alt: string }[];
   contact: {
     phones: string[];
@@ -33,7 +33,7 @@ export const branches: Record<string, BranchConfig> = {
   borivali: {
     slug: 'borivali',
     name: 'Borivali West',
-    doctor: {
+    doctors: [{
       name: "Dr. Sandeep Singh",
       title: "B.D.S., M.D.S., Certified Invisalign Specialist, Ph.D. (p.u)",
       image: "/images/doctor/sandeep singh.jpg",
@@ -45,12 +45,12 @@ export const branches: Record<string, BranchConfig> = {
         "Consultant to 25+ clinics across Mumbai"
       ],
       footer: "He delivers functional aesthetics through advanced braces and Invisalign, tackling even the most challenging cases for people of all age groups."
-    },
+    }],
     clinicImages: [
       { src: "/images/clinic/boravli/clinic1.webp", alt: "Modern Reception" },
       { src: "/images/clinic/boravli/clinc2.JPEG", alt: "Treatment Room" },
       { src: "/images/clinic/boravli/clinc3.webp", alt: "Digital X-Ray Area" },
-      { src: "/images/clinic/boravli/clinc4.jpg", alt: "Patient Lounge" }
+      { src: "/images/clinic/andheri/clinic4.JPEG", alt: "Modern Treatment Room" }
     ],
     contact: {
       phones: ["+91 9821528338", "+91 8451060010"],
@@ -71,7 +71,7 @@ export const branches: Record<string, BranchConfig> = {
       implant: "₹27,000 onwards*"
     },
     heroTitle: "Premium Painless Dentistry in Borivali West",
-    heroVideo: "/videos/brevli/StorySaver.net-impressionzdentalcare-Video-1776941816077.mp4",
+    heroVideo: "/videos/bravli/StorySaver.net-impressionzdentalcare-Video-1776941719341.mp4",
     reviews: [
       {
         name: "Sayma Mahatre",
@@ -102,22 +102,37 @@ export const branches: Record<string, BranchConfig> = {
   andheri: {
     slug: 'andheri',
     name: 'Andheri West',
-    doctor: {
-      name: "Dr. Priya Singh",
-      title: "Cosmetic Dental Surgeon",
-      image: "/images/doctor/dr-priya-singh.webp",
-      description: "Dr. Priya Singh earned her BDS from MGM Dental College in 2008 and holds an international merit certificate in cosmetic dentistry from the prestigious New York University. She specializes in full-mouth rehabilitation with an artistic eye for minimal invasive techniques.",
-      highlights: [
-        "NYU Certified Cosmetic Dentist",
-        "Full-Mouth Rehabilitation Specialist",
-        "Expert in Minimal Invasive Techniques",
-        "Online Dental Educator for upcoming dentists"
-      ],
-      footer: "Dedicated to understanding patient needs, she goes the extra mile to deliver healthy, beautiful smiles using the latest advances in dentistry."
-    },
+    doctors: [
+      {
+        name: "Dr. Priya Singh",
+        title: "Cosmetic Dental Surgeon",
+        image: "/images/doctor/dr-priya-singh.webp",
+        description: "Dr. Priya Singh earned her BDS from MGM Dental College in 2008 and holds an international merit certificate in cosmetic dentistry from the prestigious New York University. She specializes in full-mouth rehabilitation with an artistic eye for minimal invasive techniques.",
+        highlights: [
+          "NYU Certified Cosmetic Dentist",
+          "Full-Mouth Rehabilitation Specialist",
+          "Expert in Minimal Invasive Techniques",
+          "Online Dental Educator for upcoming dentists"
+        ],
+        footer: "Dedicated to understanding patient needs, she goes the extra mile to deliver healthy, beautiful smiles using the latest advances in dentistry."
+      },
+      {
+        name: "Dr. Akbar Ingaria",
+        title: "Dental Surgeon and Implantologist",
+        image: "/images/doctor/dr-akbar-ingaria.webp",
+        description: "He completed his bachelors in dental surgery from MA Rangoonwala Dental College Pune in 2009. He is a certified implantologist and is a specialist in single to full mouth implant restoration. He believes in perfection and treats his patients with immense care and compassion. He also specializes in Rootcanal treatments and has expertise in retreatment of teeth. Always staying current with the latest concepts in dentistry, he prides himself on delivering painless dentistry to patients and has treated countless patients successfully.",
+        highlights: [
+          "Specialist in Single to Full Mouth Implant Restoration",
+          "Certified Implantologist (BDS Pune 2009)",
+          "Expertise in Root Canal & Retreatments",
+          "Dedicated to Painless Patient Care"
+        ],
+        footer: "Staying at the forefront of modern dentistry, he ensures every patient receives compassionate, perfection-driven treatment for lasting oral health."
+      }
+    ],
     clinicImages: [
-      { src: "/images/clinic/andheri/clinic1.jpg", alt: "Luxury Reception" },
-      { src: "/images/clinic/andheri/clinic2.jpg", alt: "Tech-Enabled Treatment" },
+      { src: "/images/clinic/andheri/clinic1.JPEG", alt: "Luxury Reception" },
+      { src: "/images/clinic/andheri/clinic2.JPEG", alt: "Tech-Enabled Treatment" },
       { src: "/images/clinic/andheri/clinic3.JPEG", alt: "Consultation Suite" },
       { src: "/images/clinic/andheri/clinic4.JPEG", alt: "Clinical Excellence" }
     ],
@@ -130,7 +145,7 @@ export const branches: Record<string, BranchConfig> = {
       googleMapsLink: "https://maps.app.goo.gl/HcHzHDgKcorPzgzX6"
     },
     usps: [
-      "Intraoral scanners (advanced tech)",
+      "Advanced Aligners & Braces",
       "Painless treatment",
       "Affordable pricing",
       "Predictable results",
@@ -140,7 +155,7 @@ export const branches: Record<string, BranchConfig> = {
       implant: "₹27,000 onwards*"
     },
     heroTitle: "Advanced Painless Dentistry in Andheri West",
-    heroVideo: "/videos/andheri/StorySaver.net-impressionzdentalcare-Video-1776941719341.mp4",
+    heroVideo: "/videos/andherii/StorySaver.net-impressionzdentalcare-Video-1776941816077.mp4",
     reviews: [
       {
         name: "Divya Inkepalli",

@@ -7,7 +7,7 @@ interface DoctorProfileProps {
 }
 
 export default function DoctorProfile({ onBookAppointment, branch }: DoctorProfileProps) {
-  const doctors = branch ? [branch.doctor] : [];
+  const doctors = branch?.doctors || [];
 
   if (doctors.length === 0) return null;
 

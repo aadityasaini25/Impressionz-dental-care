@@ -24,7 +24,7 @@ export async function generateMetadata({
   }
 
   const title = `${branch.heroTitle} | Impressionz Dental Care — ${branch.name}`;
-  const description = `${branch.doctor.name} at Impressionz Dental Care, ${branch.name}. Painless implants, Invisalign, braces and cosmetic dentistry. ${branch.contact.timings}.`;
+  const description = `${branch.doctors.map(d => d.name).join(' & ')} at Impressionz Dental Care, ${branch.name}. Painless implants, Invisalign, braces and cosmetic dentistry. ${branch.contact.timings}.`;
 
   return {
     title,
@@ -39,7 +39,7 @@ export async function generateMetadata({
       siteName: "Impressionz Dental Care",
       images: [
         {
-          url: "/images/logo.webp",
+          url: "/images/logo.png",
           width: 1200,
           height: 630,
           alt: `Impressionz Dental Care – ${branch.name}`,
@@ -52,7 +52,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: ["/images/logo.webp"],
+      images: ["/images/logo.png"],
     },
   };
 }
@@ -74,7 +74,7 @@ export default async function BranchPage({
     "@context": "https://schema.org",
     "@type": "Dentist",
     name: `Impressionz Dental Care – ${branch.name}`,
-    image: "/images/logo.webp",
+    image: "/images/logo.png",
     url: `https://impressionzdentalcare.com/${branch.slug}`,
     telephone: branch.contact.phones[0],
     email: branch.contact.email,

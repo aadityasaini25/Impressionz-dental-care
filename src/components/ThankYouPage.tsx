@@ -10,7 +10,7 @@ export default function ThankYouPage() {
   const slug = params.get('branch') || '';
   const branch = branches[slug];
 
-  const doctor = branch?.doctor;
+  const doctor = branch?.doctors?.[0];
   const primaryPhone = branch?.contact.phones[0] || '+91 98215 28338';
   const phoneTel = primaryPhone.replace(/\s/g, '');
   const branchName = branch?.name || 'Impressionz Dental Care';

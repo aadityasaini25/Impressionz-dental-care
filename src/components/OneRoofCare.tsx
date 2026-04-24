@@ -75,9 +75,13 @@ export default function OneRoofCare() {
               <div aria-hidden className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-2xl opacity-40"
                    style={{ background: 'radial-gradient(circle, var(--accent-pink) 0%, transparent 70%)' }} />
               <div className="relative flex -space-x-3">
-                {[1, 2, 3].map((i) => (
+                {[
+                  "/images/doctor/sandeep singh.jpg",
+                  "/images/doctor/dr-priya-singh.webp",
+                  "/images/doctor/dr-akbar-ingaria.webp"
+                ].map((img, i) => (
                   <div key={i} className="w-10 h-10 rounded-full border-2 border-[var(--brand-dark)] bg-gray-200 overflow-hidden">
-                    <Image src={`/images/doctor/${i === 1 ? 'sandeep singh.jpg' : 'dr-priya-singh.webp'}`} alt="Expert" width={40} height={40} className="object-cover" />
+                    <Image src={img} alt="Expert" width={40} height={40} className="object-cover" />
                   </div>
                 ))}
               </div>

@@ -24,12 +24,12 @@ export default function Footer({ branch }: FooterProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-8">
         <div className="text-center mb-12">
-          <div className="bg-white p-3 rounded-2xl inline-block mb-4 depth-stack">
+          <div className="inline-block mb-4">
             <Image
-              src="/images/logo.webp"
+              src="/images/logo.png"
               alt="Impressionz Dental Care"
-              width={180}
-              height={55}
+              width={240}
+              height={75}
               className="h-auto w-auto opacity-100"
               style={{ width: 'auto', height: 'auto' }}
             />

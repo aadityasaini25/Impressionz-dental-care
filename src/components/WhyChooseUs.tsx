@@ -11,7 +11,7 @@ export default function WhyChooseUs({ branch }: WhyChooseUsProps) {
     {
       icon: "🏆",
       title: "Certified Specialist Dentist",
-      desc: `Our clinic is led by ${branch?.doctor.name || "top-tier specialists"} who have extensive experience to ensure you receive the highest standard of dental care.`,
+      desc: `Our clinic is led by ${branch?.doctors ? branch.doctors.map(d => d.name).join(' & ') : "top-tier specialists"} who have extensive experience to ensure you receive the highest standard of dental care.`,
     },
     {
       icon: "💝",
