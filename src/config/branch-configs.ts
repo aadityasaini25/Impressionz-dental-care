@@ -48,9 +48,9 @@ export const branches: Record<string, BranchConfig> = {
     }],
     clinicImages: [
       { src: "/images/clinic/boravli/clinic1.webp", alt: "Modern Reception" },
-      { src: "/images/clinic/boravli/clinc2.JPEG", alt: "Treatment Room" },
+      { src: "/images/clinic/boravli/clinic2.webp", alt: "Treatment Room" },
       { src: "/images/clinic/boravli/clinc3.webp", alt: "Digital X-Ray Area" },
-      { src: "/images/clinic/andheri/clinic4.JPEG", alt: "Modern Treatment Room" }
+      { src: "/images/clinic/boravli/clinc4.jpg", alt: "Modern Treatment Room" }
     ],
     contact: {
       phones: ["+91 9821528338", "+91 8451060010"],
