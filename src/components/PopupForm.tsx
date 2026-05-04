@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import { BranchConfig } from "@/config/branch-configs";
+import { BranchConfig, branches } from "@/config/branch-configs";
 
 interface PopupFormProps {
   isOpen: boolean;
@@ -16,39 +16,65 @@ const BOOKING_SCRIPT_URL = process.env.NEXT_PUBLIC_BOOKING_SCRIPT_URL || '';
 export default function PopupForm({ isOpen, onClose, branch }: PopupFormProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // When the form is opened without a branch (e.g. from the landing page),
+  // let the user pick which clinic they're booking with.
+  const [selectedSlug, setSelectedSlug] = useState<'borivali' | 'andheri' | ''>(branch?.slug || '');
 
-  const primaryPhone = branch ? branch.contact.phones[0] : "";
+  const activeBranch: BranchConfig | undefined = branch || (selectedSlug ? branches[selectedSlug] : undefined);
+  const primaryPhone = activeBranch ? activeBranch.contact.phones[0] : "";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
 
+    if (!activeBranch) {
+      alert('Please choose which clinic you want to book with.');
+      return;
+    }
+
     const data = {
       name: formData.get('fullName') as string,
       phone: formData.get('phoneNumber') as string,
       email: formData.get('email') as string,
       concern: formData.get('dentalConcern') as string,
-      branch: branch?.slug || '',
-      branchName: branch?.name || '',
+      // Explicit, unambiguous clinic identification for the receiving sheet/CRM
+      clinic: activeBranch.name,
+      clinicSlug: activeBranch.slug,
+      clinicAddress: activeBranch.contact.address,
+      clinicPhone: activeBranch.contact.phones[0] || '',
+      // Kept for backwards compatibility with existing Apps Script columns
+      branch: activeBranch.slug,
+      branchName: activeBranch.name,
+      submittedFrom: typeof window !== 'undefined' ? window.location.href : '',
+      submittedAt: new Date().toISOString(),
     };
 
     setIsSubmitting(true);
     try {
-      if (BOOKING_SCRIPT_URL.trim()) {
+      if (!BOOKING_SCRIPT_URL.trim()) {
+        // Loud warning in dev so you instantly know the env var didn't load
+        console.warn(
+          '[BookingForm] NEXT_PUBLIC_BOOKING_SCRIPT_URL is empty. ' +
+          'Form will not submit to Google Sheet. Check .env.local and restart `npm run dev`.'
+        );
+      } else {
+        // Apps Script /exec returns a 302 to a googleusercontent.com URL with no CORS headers,
+        // so we use no-cors. Body goes as text/plain (browser strips application/json anyway
+        // in no-cors mode); the Apps Script `JSON.parse(e.postData.contents)` reads it fine.
+        console.log('[BookingForm] Submitting to:', BOOKING_SCRIPT_URL);
         await fetch(BOOKING_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
       }
       onClose();
       // Pass branch context to thank-you page so it can personalize
-      const qs = branch ? `?branch=${branch.slug}` : '';
+      const qs = `?branch=${activeBranch.slug}`;
       router.push(`/thank-you${qs}`);
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('[BookingForm] Submit failed:', error);
       alert(`Something went wrong. Please call us at ${primaryPhone || '+91 98215 28338'} to book.`);
     } finally {
       setIsSubmitting(false);
@@ -84,9 +110,47 @@ export default function PopupForm({ isOpen, onClose, branch }: PopupFormProps) {
           <h2 id="popup-title" className="text-xl md:text-2xl font-bold text-[var(--brand-teal-deep)]">
             Book Your Appointment
           </h2>
-          {branch && (
-            <p className="text-sm text-gray-500 mt-1">
-              at Impressionz Dental Care, <span className="font-semibold text-[var(--brand-teal)]">{branch.name}</span>
+        </div>
+
+        {/* Clinic selector — always visible & editable so the client confirms which clinic the booking is for. */}
+        <div className="mb-4">
+          <label className="block text-sm font-semibold mb-2 text-gray-800">
+            Which clinic are you booking with? <span className="text-red-500">*</span>
+          </label>
+          <div className="grid grid-cols-2 gap-2">
+            {(['borivali', 'andheri'] as const).map((slug) => {
+              const isSelected = activeBranch?.slug === slug;
+              const b = branches[slug];
+              return (
+                <button
+                  key={slug}
+                  type="button"
+                  onClick={() => setSelectedSlug(slug)}
+                  aria-pressed={isSelected}
+                  className={`relative rounded-lg border-2 p-3 text-left transition-all ${
+                    isSelected
+                      ? 'border-[var(--brand-teal-deep)] bg-[var(--brand-teal)]/10 shadow-sm'
+                      : 'border-gray-200 hover:border-[var(--brand-teal)] hover:bg-[var(--brand-teal)]/5'
+                  }`}
+                >
+                  {isSelected && (
+                    <span
+                      aria-hidden
+                      className="absolute top-2 right-2 w-5 h-5 rounded-full bg-[var(--brand-teal-deep)] text-white text-xs font-bold flex items-center justify-center"
+                    >
+                      ✓
+                    </span>
+                  )}
+                  <p className="text-[10px] uppercase tracking-[0.15em] text-gray-500 font-bold">📍 Branch</p>
+                  <p className="text-sm font-bold text-gray-900">{b.name}</p>
+                  <p className="text-[10px] text-gray-500 mt-0.5 line-clamp-1">{b.contact.address}</p>
+                </button>
+              );
+            })}
+          </div>
+          {activeBranch && (
+            <p className="text-[11px] text-gray-500 mt-2">
+              Booking for <span className="font-semibold text-[var(--brand-teal-deep)]">Impressionz Dental Care — {activeBranch.name}</span>
             </p>
           )}
         </div>
@@ -101,6 +165,9 @@ export default function PopupForm({ isOpen, onClose, branch }: PopupFormProps) {
 
         {/* FORM */}
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Hidden inputs so the clinic is always part of the form payload, even if the script reads FormData directly */}
+          <input type="hidden" name="clinic" value={activeBranch?.name || ''} />
+          <input type="hidden" name="clinicSlug" value={activeBranch?.slug || ''} />
           <div>
             <label htmlFor="fullName" className="block text-sm font-medium mb-1">Full Name</label>
             <input
