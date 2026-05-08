@@ -10,8 +10,8 @@ interface PopupFormProps {
   branch?: BranchConfig;
 }
 
-// Set your Google Apps Script web app URL here to receive submissions (or use env NEXT_PUBLIC_BOOKING_SCRIPT_URL)
-const BOOKING_SCRIPT_URL = process.env.NEXT_PUBLIC_BOOKING_SCRIPT_URL || '';
+// Google Apps Script web app URL — receives form submissions and appends them to the "Website Bookings" tab.
+const BOOKING_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8YTAG71LloGPoe_wbuMyrkuFwbG82Aq2uqQJVb-GYsjFV1HEO_M1c44MmBtOREn9P/exec';
 
 export default function PopupForm({ isOpen, onClose, branch }: PopupFormProps) {
   const router = useRouter();
